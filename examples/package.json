@@ -13,7 +13,8 @@
   "jspm": {
     "name": "react-focus-onkeydown-demo",
     "dependencies": {
-      "react-dom": "npm:react-dom@^15.0.0"
+      "react-dom": "npm:react-dom@^15.0.0",
+      "react-focus-onkeydown": "npm:react-focus-onkeydown@^0.0.1"
     },
     "devDependencies": {
       "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@^6.6.0",
