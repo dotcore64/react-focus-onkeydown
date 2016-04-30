@@ -5,7 +5,7 @@
 [![Dependency Status][dependency-status-badge]][dependency-status]
 [![devDependency Status][dev-dependency-status-badge]][dev-dependency-status]
 
-> Focus on an element on keydown anywhere in the page higher order component
+> React higher order component for getting focus of a component when a key is pressed anywhere in the page
 
 ## Live demo
 
