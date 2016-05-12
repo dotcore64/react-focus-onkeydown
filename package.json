@@ -1,6 +1,6 @@
 {
   "name": "react-focus-onkeydown",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React higher order component for getting focus of a component when a key is pressed anywhere in the page",
   "main": "lib/index.js",
   "scripts": {
