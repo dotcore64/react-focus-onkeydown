@@ -56,4 +56,44 @@ describe('react-focus-onkeydown', () => {
 
     document.activeElement.should.equal(input);
   });
+
+  it('should switch the focus feature on', () => {
+    const spy = sinon.spy();
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+
+    const event = simulant('keydown', {
+      key: 'a',
+      keyCode: 65,
+      which: 65,
+    });
+
+    window.dispatchEvent(event);
+    spy.called.should.equal(false);
+    ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
+    window.dispatchEvent(event);
+    spy.calledOnce.should.equal(true);
+  });
+
+  it('should switch the focus feature off', () => {
+    const spy = sinon.spy();
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
+
+    const event = simulant('keydown', {
+      key: 'a',
+      keyCode: 65,
+      which: 65,
+    });
+
+    window.dispatchEvent(event);
+    spy.calledOnce.should.equal(true);
+    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+    window.dispatchEvent(event);
+    spy.calledOnce.should.equal(true);
+  });
 });
