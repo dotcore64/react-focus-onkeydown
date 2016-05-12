@@ -9,6 +9,19 @@ chai.should();
 describe('react-focus-onkeydown', () => {
   const EnhancedInput = focusOnKeyDown('input');
 
+  // TODO: Not supported yet in phantomjs, uncomment when fixed
+  // const event = new KeyboardEvent('keydown', {
+  //   key: 'a',
+  //   keyCode: 65,
+  //   which: 65,
+  // });
+
+  const event = simulant('keydown', {
+    key: 'a',
+    keyCode: 65,
+    which: 65,
+  });
+
   it('should render single input', () => {
     const container = document.createElement('div');
     ReactDOM.render(<EnhancedInput />, container);
@@ -26,19 +39,6 @@ describe('react-focus-onkeydown', () => {
 
     const input = container.childNodes[0];
     input.addEventListener('focus', nativeSpy);
-
-    // TODO: Not supported yet in phantomjs, uncomment when fixed
-    // const event = new KeyboardEvent('keydown', {
-    //   key: 'a',
-    //   keyCode: 65,
-    //   which: 65,
-    // });
-
-    const event = simulant('keydown', {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
 
     window.dispatchEvent(event);
 
@@ -64,12 +64,6 @@ describe('react-focus-onkeydown', () => {
     document.body.appendChild(container);
     ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
 
-    const event = simulant('keydown', {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
-
     window.dispatchEvent(event);
     spy.called.should.equal(false);
     ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
@@ -83,12 +77,6 @@ describe('react-focus-onkeydown', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
-
-    const event = simulant('keydown', {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
 
     window.dispatchEvent(event);
     spy.calledOnce.should.equal(true);
@@ -104,12 +92,6 @@ describe('react-focus-onkeydown', () => {
     document.body.appendChild(container);
     ReactDOM.render(<EnhancedInput onFocus={spy} />, container);
 
-    const event = simulant('keydown', {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
-
     window.dispatchEvent(event);
     spy.calledOnce.should.equal(true);
     ReactDOM.unmountComponentAtNode(container);
@@ -123,12 +105,6 @@ describe('react-focus-onkeydown', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     ReactDOM.render(<EnhancedInput focusOnKeyDown={false}onFocus={spy} />, container);
-
-    const event = simulant('keydown', {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
 
     window.dispatchEvent(event);
     spy.called.should.equal(false);
@@ -144,14 +120,14 @@ describe('react-focus-onkeydown', () => {
     document.body.appendChild(container);
     ReactDOM.render(<EnhancedInput focusOnKeyDown={false}onFocus={spy} />, container);
 
-    const event = simulant('keydown', {
+    const ctrlEvent = simulant('keydown', {
       key: 'a',
       keyCode: 65,
       which: 65,
       ctrlKey: true,
     });
 
-    window.dispatchEvent(event);
+    window.dispatchEvent(ctrlEvent);
     spy.called.should.equal(false);
   });
 });
