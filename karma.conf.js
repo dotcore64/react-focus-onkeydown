@@ -28,14 +28,14 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'test/*.js': ['webpack', 'sourcemap'],
-      'src/*.js': ['webpack', 'sourcemap']
+      'src/*.js': ['webpack', 'sourcemap', 'coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec'],
+    reporters: ['coverage', 'coveralls', 'spec'],
 
 
     // web server port
@@ -71,11 +71,26 @@ module.exports = function(config) {
     webpack: {
       module: {
         loaders: [{
-          test: /\.(js|jsx)$/, exclude: /node_modules/,
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules\//,
           loader: 'babel-loader'
+        }],
+        postLoaders: [{ //delays coverage til after tests are run, fixing transpiled source coverage error
+          test: /\.js$/,
+          exclude: /(test|node_modules)\//,
+          loader: 'istanbul-instrumenter'
         }]
       },
       devtool: 'inline-source-map'
+    },
+
+    webpackServer: {
+      noInfo: true //please don't spam the console when running in karma!
+    },
+
+    coverageReporter: {
+      type : 'lcov', //'html', // disabled - erroring now, https://github.com/karma-runner/karma-coverage/issues/157
+      dir : 'coverage/'
     }
   })
 }
