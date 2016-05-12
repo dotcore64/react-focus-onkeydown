@@ -2,7 +2,7 @@
 // Generated on Wed May 11 2016 23:26:57 GMT+0900 (JST)
 
 module.exports = function(config) {
-  config.set({
+  const configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -35,7 +35,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['coverage', 'coveralls', 'spec'],
+    reporters: ['spec', 'coverage'],
 
 
     // web server port
@@ -92,5 +92,11 @@ module.exports = function(config) {
       type : 'html', // disabled - erroring now, https://github.com/karma-runner/karma-coverage/issues/157
       dir : 'coverage/'
     }
-  })
+  };
+
+  if (process.env.TRAVIS) {
+    configuration.reporters.push('coveralls');
+  }
+
+  config.set(configuration);
 }
