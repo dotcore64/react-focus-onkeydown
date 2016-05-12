@@ -96,4 +96,24 @@ describe('react-focus-onkeydown', () => {
     window.dispatchEvent(event);
     spy.calledOnce.should.equal(true);
   });
+
+  it('should toggle focus off when component unmounts', () => {
+    const spy = sinon.spy();
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    ReactDOM.render(<EnhancedInput onFocus={spy} />, container);
+
+    const event = simulant('keydown', {
+      key: 'a',
+      keyCode: 65,
+      which: 65,
+    });
+
+    window.dispatchEvent(event);
+    spy.calledOnce.should.equal(true);
+    ReactDOM.unmountComponentAtNode(container);
+    window.dispatchEvent(event);
+    spy.calledOnce.should.equal(true);
+  });
 });
