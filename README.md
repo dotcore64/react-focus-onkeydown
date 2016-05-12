@@ -41,8 +41,6 @@ Activates or deactivates focus feature
 ## TODO
 
 * Improve examples
-* Improve documentation with tables, etc
-* Test
 
 ## License
 
