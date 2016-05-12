@@ -89,8 +89,11 @@ module.exports = function(config) {
     },
 
     coverageReporter: {
-      type : 'html', // disabled - erroring now, https://github.com/karma-runner/karma-coverage/issues/157
-      dir : 'coverage/'
+      dir : 'coverage/',
+      reporters: [
+        { type : 'html' },
+        { type : 'lcov' }
+      ]
     }
   };
 
