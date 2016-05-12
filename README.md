@@ -35,7 +35,7 @@ const () => (
 
 ### focusOnKeyDown
 
-Type: `function`, default: `true`
+Type: `boolean`, default: `true`
 
 Activates or deactivates focus feature
 
