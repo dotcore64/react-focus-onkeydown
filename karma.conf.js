@@ -70,15 +70,15 @@ module.exports = function(config) {
 
     webpack: {
       module: {
+        preLoaders: [{
+          test: /\.js$/,
+          exclude: /(test|node_modules)\//,
+            loader: 'isparta'
+        }],
         loaders: [{
           test: /\.(js|jsx)$/,
           exclude: /node_modules\//,
           loader: 'babel-loader'
-        }],
-        postLoaders: [{ //delays coverage til after tests are run, fixing transpiled source coverage error
-          test: /\.js$/,
-          exclude: /(test|node_modules)\//,
-          loader: 'istanbul-instrumenter'
         }]
       },
       devtool: 'inline-source-map'
@@ -89,7 +89,7 @@ module.exports = function(config) {
     },
 
     coverageReporter: {
-      type : 'lcov', //'html', // disabled - erroring now, https://github.com/karma-runner/karma-coverage/issues/157
+      type : 'html', // disabled - erroring now, https://github.com/karma-runner/karma-coverage/issues/157
       dir : 'coverage/'
     }
   })
