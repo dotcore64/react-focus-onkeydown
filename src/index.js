@@ -55,7 +55,8 @@ export default Input => {
     }
 
     render() {
-      return createElement(Input, { ...this.props, ref: this.storeMessageInput });
+      const { focusOnKeyDown, ...props } = this.props; // eslint-disable-line no-unused-vars
+      return createElement(Input, { ...props, ref: this.storeMessageInput });
     }
   }
 
