@@ -30,7 +30,7 @@
   "homepage": "https://github.com/perrin4869/react-focus-onkeydown#readme",
   "devDependencies": {
     "babel-core": "^6.11.4",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
