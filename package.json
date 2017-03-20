@@ -62,7 +62,7 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "simulant": "^0.2.2",
-    "sinon": "^1.17.5",
+    "sinon": "^2.1.0",
     "webpack": "^1.13.1"
   },
   "peerDependencies": {
