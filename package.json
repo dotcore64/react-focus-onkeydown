@@ -60,7 +60,7 @@
     "mocha": "^3.0.0",
     "phantomjs-prebuilt": "^2.1.9",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0",
+    "react-dom": "^15.5.0",
     "simulant": "^0.2.2",
     "sinon": "^1.17.5",
     "webpack": "^1.13.1"
