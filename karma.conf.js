@@ -70,16 +70,17 @@ module.exports = function(config) {
 
     webpack: {
       module: {
-        preLoaders: [{
+        rules: [{
           test: /\.js$/,
+          enforce: 'pre',
           exclude: /(test|node_modules)\//,
-            loader: 'isparta'
-        }],
-        loaders: [{
+          loader: 'isparta-loader'
+        }, {
           test: /\.js?(x)$/,
           exclude: /node_modules\//,
           loader: 'babel-loader'
-        }]
+        }],
+        loaders: []
       },
       devtool: 'inline-source-map'
     },
