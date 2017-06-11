@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 
-export default Input => {
+export default (Input) => {
   class FocusOnKeyDown extends Component {
     static propTypes = {
       focusOnKeyDown: PropTypes.bool,
@@ -51,7 +51,7 @@ export default Input => {
       this.messageInput.focus();
     }
 
-    storeMessageInput = c => {
+    storeMessageInput = (c) => {
       this.messageInput = c;
     }
 
