@@ -43,8 +43,8 @@ describe('react-focus-onkeydown', () => {
 
     expect(reactSpy.calledOnce).to.equal(true);
     const reactArgs = reactSpy.args[0];
-    expect(reactArgs).to.have.lengthOf(3); // SyntheticUIEvent, undefined, Event (native)
-    const reactArg = reactArgs[2];
+    expect(reactArgs).to.have.lengthOf(2); // SyntheticUIEvent, Event (native)
+    const reactArg = reactArgs[1];
     expect(reactArg).to.be.instanceOf(Event);
 
     expect(nativeSpy.calledOnce).to.equal(true);
