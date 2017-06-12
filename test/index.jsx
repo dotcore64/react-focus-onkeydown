@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import simulant from 'simulant';
 import { expect } from 'chai';
 
 import focusOnKeyDown from '../src';
@@ -8,14 +7,38 @@ import focusOnKeyDown from '../src';
 describe('react-focus-onkeydown', () => {
   const EnhancedInput = focusOnKeyDown('input');
 
-  // TODO: Not supported yet in phantomjs, uncomment when fixed
-  // const event = new KeyboardEvent('keydown', {
-  //   key: 'a',
-  //   keyCode: 65,
-  //   which: 65,
-  // });
+  // TODO: Not supported yet in phantomjs, remove when fixed
+  ((window) => {
+    // Polyfills DOM4 KeyboardEvent
+    try {
+      new MouseEvent('test'); // eslint-disable-line no-new
+      return; // No need to polyfill
+    } catch (e) {
+      // Need to polyfill - fall through
+    }
 
-  const event = simulant('keydown', {
+    const defParams = { bubbles: false, cancelable: false };
+    const KeyboardEvent = function KeyboardEvent(eventType, params = defParams) {
+      const keyboardEvent = document.createEvent('KeyboardEvent');
+      keyboardEvent.initKeyboardEvent(
+        eventType,
+        params.bubbles,
+        params.cancelable,
+        window,
+        0, 0, 0, 0, 0,
+        false, false, false, false,
+        0, null,
+      );
+
+      return keyboardEvent;
+    };
+
+    KeyboardEvent.prototype = Event.prototype;
+
+    window.KeyboardEvent = KeyboardEvent; // eslint-disable-line no-param-reassign
+  })(window);
+
+  const event = new KeyboardEvent('keydown', {
     key: 'a',
     keyCode: 65,
     which: 65,
@@ -45,7 +68,7 @@ describe('react-focus-onkeydown', () => {
     const reactArgs = reactSpy.args[0];
     expect(reactArgs).to.have.lengthOf(2); // SyntheticUIEvent, Event (native)
     const reactArg = reactArgs[1];
-    expect(reactArg).to.be.instanceOf(Event);
+    expect(reactArg).to.be.instanceOf(KeyboardEvent);
 
     expect(nativeSpy.calledOnce).to.equal(true);
     const nativeArgs = nativeSpy.args[0];
@@ -103,7 +126,7 @@ describe('react-focus-onkeydown', () => {
 
     const container = document.createElement('div');
     document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown={false}onFocus={spy} />, container);
+    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
