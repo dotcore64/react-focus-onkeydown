@@ -1,42 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { expect } from 'chai';
+import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
 
 import focusOnKeyDown from '../src';
 
 describe('react-focus-onkeydown', () => {
   const EnhancedInput = focusOnKeyDown('input');
 
-  // TODO: Not supported yet in phantomjs, remove when fixed
-  ((window) => {
-    // Polyfills DOM4 KeyboardEvent
-    try {
-      new KeyboardEvent('test'); // eslint-disable-line no-new, no-use-before-define
-      return; // No need to polyfill
-    } catch (e) {
-      // Need to polyfill - fall through
-    }
-
-    const defParams = { bubbles: false, cancelable: false };
-    const KeyboardEvent = function KeyboardEvent(eventType, params = defParams) {
-      const keyboardEvent = document.createEvent('KeyboardEvent');
-      keyboardEvent.initKeyboardEvent(
-        eventType,
-        params.bubbles,
-        params.cancelable,
-        window,
-        0, 0, 0, 0, 0,
-        false, false, false, false,
-        0, null,
-      );
-
-      return keyboardEvent;
-    };
-
-    KeyboardEvent.prototype = Event.prototype;
-
-    window.KeyboardEvent = KeyboardEvent; // eslint-disable-line no-param-reassign
-  })(window);
+  // TODO: figure out why this is needed and send PR if necessary
+  KeyboardEvent.prototype = Event.prototype;
 
   const event = new KeyboardEvent('keydown', {
     key: 'a',
