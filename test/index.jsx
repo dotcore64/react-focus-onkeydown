@@ -11,7 +11,7 @@ describe('react-focus-onkeydown', () => {
   ((window) => {
     // Polyfills DOM4 KeyboardEvent
     try {
-      new MouseEvent('test'); // eslint-disable-line no-new
+      new KeyboardEvent('test'); // eslint-disable-line no-new, no-use-before-define
       return; // No need to polyfill
     } catch (e) {
       // Need to polyfill - fall through
