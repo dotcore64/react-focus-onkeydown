@@ -107,4 +107,22 @@ describe('react-focus-onkeydown', () => {
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(false);
   });
+
+  it('should not focus when ctrl key is used', () => {
+    const spy = sinon.spy();
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    ReactDOM.render(<EnhancedInput onFocus={spy} />, container);
+
+    const ctrlEvent = new KeyboardEvent('keydown', {
+      key: 'a',
+      keyCode: 65,
+      which: 65,
+      ctrlKey: true,
+    });
+
+    window.dispatchEvent(ctrlEvent);
+    expect(spy.called).to.equal(false);
+  });
 });
