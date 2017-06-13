@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Wed May 11 2016 23:26:57 GMT+0900 (JST)
 
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
+
 module.exports = function(config) {
   const configuration = {
 
@@ -28,7 +30,6 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'test/*.js?(x)': ['webpack', 'sourcemap'],
-      'src/*.js': ['webpack', 'sourcemap', 'coverage']
     },
 
 
@@ -71,12 +72,7 @@ module.exports = function(config) {
     webpack: {
       module: {
         rules: [{
-          test: /\.js$/,
-          enforce: 'pre',
-          exclude: /(test|node_modules)\//,
-          loader: 'isparta-loader'
-        }, {
-          test: /\.js?(x)$/,
+          test: /\.jsx?$/,
           exclude: /node_modules\//,
           loader: 'babel-loader'
         }],
