@@ -38,6 +38,7 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.0.2",
+    "core-js": "^2.5.1",
     "coveralls": "^2.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.3.0",
@@ -57,8 +58,8 @@
     "karma-spec-reporter": "0.0.31",
     "mocha": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.14",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.3",
@@ -67,7 +68,7 @@
     "sinon": "^4.0.1"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0"
+    "react": "^0.14.0 || >=15.0.0"
   },
   "dependencies": {
     "hoist-non-react-statics": "^1.2.0",
