@@ -59,8 +59,8 @@
     "karma-webpack": "^2.0.3",
     "mocha": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.14",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "sinon": "^4.0.1",
     "webpack": "^2.6.1"
   },

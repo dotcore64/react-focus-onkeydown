@@ -25,7 +25,7 @@ describe('react-focus-onkeydown', () => {
   });
 
   it('should focus on input', () => {
-    const reactSpy = sinon.spy();
+    const reactSpy = sinon.spy(e => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
     const nativeSpy = sinon.spy();
 
     const container = document.createElement('div');
@@ -39,9 +39,9 @@ describe('react-focus-onkeydown', () => {
 
     expect(reactSpy.calledOnce).to.equal(true);
     const reactArgs = reactSpy.args[0];
-    expect(reactArgs).to.have.lengthOf(2); // SyntheticUIEvent, Event (native)
-    const reactArg = reactArgs[1];
-    expect(reactArg).to.be.instanceOf(KeyboardEvent);
+    expect(reactArgs).to.have.lengthOf(1); // SyntheticEvent
+    const reactArg = reactArgs[0];
+    expect(reactArg.nativeEvent).to.be.instanceOf(KeyboardEvent);
 
     expect(nativeSpy.calledOnce).to.equal(true);
     const nativeArgs = nativeSpy.args[0];
