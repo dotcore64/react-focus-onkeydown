@@ -57,11 +57,11 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.3",
-    "mocha": "^3.4.2",
+    "mocha": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.14",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "sinon": "^2.3.4",
+    "sinon": "^4.0.1",
     "webpack": "^2.6.1"
   },
   "peerDependencies": {
