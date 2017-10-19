@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
 

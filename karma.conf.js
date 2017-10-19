@@ -1,7 +1,8 @@
 // Karma configuration
 // Generated on Wed May 11 2016 23:26:57 GMT+0900 (JST)
 
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
+const env = 'test';
+if (!process.env.NODE_ENV) process.env.NODE_ENV = env;
 
 module.exports = function(config) {
   const configuration = {
@@ -12,7 +13,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai', 'sinon'],
+    frameworks: ['mocha'],
 
 
     // list of files / patterns to load in the browser
@@ -29,7 +30,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*.js?(x)': ['webpack', 'sourcemap'],
+      'test/*.js?(x)': ['rollup', 'sourcemap'],
     },
 
 
@@ -69,20 +70,31 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     concurrency: Infinity,
 
-    webpack: {
-      module: {
-        rules: [{
-          test: /\.jsx?$/,
-          exclude: /node_modules\//,
-          loader: 'babel-loader'
-        }],
-        loaders: []
-      },
-      devtool: 'inline-source-map'
-    },
-
-    webpackServer: {
-      noInfo: true //please don't spam the console when running in karma!
+    rollupPreprocessor: {
+      plugins: [
+        require('rollup-plugin-replace')({ 'process.env.NODE_ENV': JSON.stringify(env) }), // this is for react
+        require('rollup-plugin-babel')({
+          exclude: 'node_modules/**',
+        }),
+        require('rollup-plugin-node-resolve')({
+          jsnext: true,
+          main: true,
+          browser: true,
+        }),
+        require('rollup-plugin-commonjs')({
+          include: 'node_modules/**',
+          namedExports: {
+            'node_modules/chai/index.js': ['expect'],
+            'node_modules/prop-types/index.js': ['bool', 'func', 'node', 'number', 'oneOfType', 'element', 'string'],
+            'node_modules/react/react.js': [
+              'createElement',
+              'Component',
+            ],
+          },
+        }),
+      ],
+      format: 'iife',
+      sourcemap: 'inline',
     },
 
     coverageReporter: {
