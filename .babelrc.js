@@ -2,7 +2,7 @@ const env = process.env.NODE_ENV;
 
 module.exports = {
   presets: [
-    (env === 'test') ? 'es2015-rollup' : 'es2015',
+    (env === 'test') ? ['env', { modules: false }] : 'env',
     'react',
   ],
   plugins: [
