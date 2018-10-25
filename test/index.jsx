@@ -7,7 +7,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
 
-import focusOnKeyDown from '../src';
+import focusOnKeyDown from '..';
 
 describe('react-focus-onkeydown', () => {
   const EnhancedInput = focusOnKeyDown('input');
