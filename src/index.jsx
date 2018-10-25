@@ -1,4 +1,4 @@
-import { Component, createElement } from 'react';
+import React, { Component, createRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
@@ -6,6 +6,7 @@ import getDisplayName from 'react-display-name';
 export default (Input) => {
   class FocusOnKeyDown extends Component {
     static propTypes = {
+      forwardedRef: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
       focusOnKeyDown: PropTypes.bool,
     }
 
@@ -48,18 +49,19 @@ export default (Input) => {
     }
 
     focus = () => {
-      this.messageInput.focus();
-    }
-
-    storeMessageInput = (c) => {
-      this.messageInput = c;
+      const { forwardedRef: input } = this.props;
+      input.current.focus();
     }
 
     render() {
-      const { focusOnKeyDown, ...props } = this.props; // eslint-disable-line no-unused-vars
-      return createElement(Input, { ...props, ref: this.storeMessageInput });
+      const { focusOnKeyDown, forwardedRef, ...props } = this.props;
+
+      return <Input {...props} ref={forwardedRef} />;
     }
   }
 
-  return hoistStatics(FocusOnKeyDown, Input);
+  const HoistedFocusOnKeyDown = hoistStatics(FocusOnKeyDown, Input);
+  return forwardRef((props, ref) => (
+    <HoistedFocusOnKeyDown {...props} forwardedRef={ref || createRef()} />
+  ));
 };

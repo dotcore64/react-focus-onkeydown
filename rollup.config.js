@@ -5,7 +5,7 @@ import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
-const input = 'src/index.js';
+const input = 'src/index.jsx';
 const plugins = [
   babel({ exclude: '**/node_modules/**' }),
 ];
