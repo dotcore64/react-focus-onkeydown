@@ -1,10 +1,12 @@
+/* eslint-disable global-require, max-len  */
+
 // Karma configuration
 // Generated on Wed May 11 2016 23:26:57 GMT+0900 (JST)
 
 const env = 'test';
 if (!process.env.NODE_ENV) process.env.NODE_ENV = env;
 
-module.exports = function (config) {
+module.exports = (config) => {
   const configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
