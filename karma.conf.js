@@ -4,7 +4,7 @@
 const env = 'test';
 if (!process.env.NODE_ENV) process.env.NODE_ENV = env;
 
-module.exports = function(config) {
+module.exports = function (config) {
   const configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -18,7 +18,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/*.js?(x)'
+      'test/index.js', // karma middleware gives out a warning when loading a jsx file
     ],
 
 
@@ -30,7 +30,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*.js?(x)': ['rollup', 'sourcemap'],
+      'test/index.js': ['rollup', 'sourcemap'],
     },
 
 
@@ -96,16 +96,17 @@ module.exports = function(config) {
       output: {
         format: 'iife',
         sourcemap: 'inline',
+        name: 'ReactFocusOnKeyDown',
       },
     },
 
     coverageReporter: {
-      dir : 'coverage/',
+      dir: 'coverage/',
       reporters: [
-        { type : 'html' },
-        { type : 'lcov' }
-      ]
-    }
+        { type: 'html' },
+        { type: 'lcov' },
+      ],
+    },
   };
 
   if (process.env.TRAVIS) {
@@ -113,4 +114,4 @@ module.exports = function(config) {
   }
 
   config.set(configuration);
-}
+};
