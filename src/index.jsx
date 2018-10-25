@@ -65,7 +65,7 @@ export default (Input) => {
   function forwardToFocusOnKeyDown(props, ref) {
     return <HoistedFocusOnKeyDown {...props} forwardedRef={ref || createRef()} />;
   }
-  forwardToFocusOnKeyDown.displayName = `ForwardRef(${HoistedFocusOnKeyDown.displayName})`;
+  forwardToFocusOnKeyDown.displayName = HoistedFocusOnKeyDown.displayName;
 
   return forwardRef(forwardToFocusOnKeyDown);
 };
