@@ -21,11 +21,11 @@ export default (Input) => {
       this.syncEventListener(focusOnKeyDown);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
       const { focusOnKeyDown } = this.props;
 
-      if (focusOnKeyDown !== nextProps.focusOnKeyDown) {
-        this.syncEventListener(nextProps.focusOnKeyDown);
+      if (focusOnKeyDown !== prevProps.focusOnKeyDown) {
+        this.syncEventListener(focusOnKeyDown);
       }
     }
 

@@ -1,7 +1,7 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import sinon from 'sinon';
 import { expect } from 'chai';
@@ -21,9 +21,19 @@ describe('react-focus-onkeydown', () => {
     which: 65,
   });
 
+  const render = (props = {}, container = document.createElement('div')) => {
+    document.body.appendChild(container);
+    ReactDOM.render((
+      <StrictMode>
+        <EnhancedInput {...props} />
+      </StrictMode>
+    ), container);
+
+    return container;
+  };
+
   it('should render single input', () => {
-    const container = document.createElement('div');
-    ReactDOM.render(<EnhancedInput />, container);
+    const container = render();
     expect(container.childNodes).to.have.lengthOf(1);
     expect(container.childNodes[0].tagName).to.equal('INPUT');
   });
@@ -32,9 +42,7 @@ describe('react-focus-onkeydown', () => {
     const reactSpy = sinon.spy(e => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
     const nativeSpy = sinon.spy();
 
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput onFocus={reactSpy} />, container);
+    const container = render({ onFocus: reactSpy });
 
     const input = container.childNodes[0];
     input.addEventListener('focus', nativeSpy);
@@ -58,14 +66,11 @@ describe('react-focus-onkeydown', () => {
 
   it('should switch the focus feature on', () => {
     const spy = sinon.spy();
-
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+    const container = render({ focusOnKeyDown: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
+    render({ focusOnKeyDown: true, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -73,13 +78,11 @@ describe('react-focus-onkeydown', () => {
   it('should switch the focus feature off', () => {
     const spy = sinon.spy();
 
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown onFocus={spy} />, container);
+    const container = render({ focusOnKeyDown: true, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+    render({ focusOnKeyDown: false, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -87,9 +90,7 @@ describe('react-focus-onkeydown', () => {
   it('should toggle focus off when component unmounts', () => {
     const spy = sinon.spy();
 
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput onFocus={spy} />, container);
+    const container = render({ onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
@@ -101,13 +102,11 @@ describe('react-focus-onkeydown', () => {
   it('should keep focus off when component is rerendered', () => {
     const spy = sinon.spy();
 
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+    const container = render({ focusOnKeyDown: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    ReactDOM.render(<EnhancedInput focusOnKeyDown={false} onFocus={spy} />, container);
+    render({ focusOnKeyDown: false, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(false);
   });
@@ -115,9 +114,7 @@ describe('react-focus-onkeydown', () => {
   it('should not focus when ctrl key is used', () => {
     const spy = sinon.spy();
 
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    ReactDOM.render(<EnhancedInput onFocus={spy} />, container);
+    render({ onFocus: spy });
 
     const ctrlEvent = new KeyboardEvent('keydown', {
       key: 'a',
