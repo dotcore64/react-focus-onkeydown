@@ -93,8 +93,10 @@ module.exports = function(config) {
           },
         }),
       ],
-      format: 'iife',
-      sourcemap: 'inline',
+      output: {
+        format: 'iife',
+        sourcemap: 'inline',
+      },
     },
 
     coverageReporter: {
