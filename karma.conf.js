@@ -76,13 +76,9 @@ module.exports = (config) => {
       plugins: [
         require('rollup-plugin-replace')({ 'process.env.NODE_ENV': JSON.stringify(env) }), // this is for react
         require('rollup-plugin-babel')({
-          exclude: 'node_modules/**',
+          exclude: /node_modules\/(?!sinon).*/, // sinon uses ES6 features that phantom.js does not understand
         }),
-        require('rollup-plugin-node-resolve')({
-          jsnext: true,
-          main: true,
-          browser: true,
-        }),
+        require('rollup-plugin-node-resolve')(),
         require('rollup-plugin-commonjs')({
           include: 'node_modules/**',
           namedExports: {
