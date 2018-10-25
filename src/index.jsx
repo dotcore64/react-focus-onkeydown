@@ -61,7 +61,11 @@ export default (Input) => {
   }
 
   const HoistedFocusOnKeyDown = hoistStatics(FocusOnKeyDown, Input);
-  return forwardRef((props, ref) => (
-    <HoistedFocusOnKeyDown {...props} forwardedRef={ref || createRef()} />
-  ));
+
+  function forwardToFocusOnKeyDown(props, ref) {
+    return <HoistedFocusOnKeyDown {...props} forwardedRef={ref || createRef()} />;
+  }
+  forwardToFocusOnKeyDown.displayName = `ForwardRef(${HoistedFocusOnKeyDown.displayName})`;
+
+  return forwardRef(forwardToFocusOnKeyDown);
 };
