@@ -10,7 +10,7 @@
 
 ## Live demo
 
-You can see the simplest demo here: [Live demo](https://perrin4869.github.io/react-focus-onkeydown)
+You can see the simplest demo here: [Live demo](https://codesandbox.io/s/615xvjnrwr)
 
 ## Install
 
