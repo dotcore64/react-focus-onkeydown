@@ -18,6 +18,16 @@ You can see the simplest demo here: [Live demo](https://perrin4869.github.io/rea
 $ npm install --save react-focus-onkeydown
 ```
 
+## Examples
+
+Run examples:
+
+```javascript
+cd examples
+npm install
+npm start
+```
+
 ## Usage
 
 ```javascript
