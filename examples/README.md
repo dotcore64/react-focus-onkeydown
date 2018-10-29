@@ -5,7 +5,7 @@
 Run install scripts:
 
 ```
-$ npm install && jspm install
+$ npm install
 ```
 
 Build the client scripts:
