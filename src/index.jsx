@@ -1,64 +1,44 @@
-import React, { Component, createRef, forwardRef } from 'react';
+import React, { useEffect, createRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 
 export default (Input) => {
-  class FocusOnKeyDown extends Component {
-    static propTypes = {
-      forwardedRef: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-      focusOnKeyDown: PropTypes.bool,
-    }
-
-    static defaultProps = {
-      focusOnKeyDown: true,
-    }
-
-    static displayName = `FocusOnKeyDown(${getDisplayName(Input)})`
-
-    componentDidMount() {
-      const { focusOnKeyDown } = this.props;
-      this.syncEventListener(focusOnKeyDown);
-    }
-
-    componentDidUpdate(prevProps) {
-      const { focusOnKeyDown } = this.props;
-
-      if (focusOnKeyDown !== prevProps.focusOnKeyDown) {
-        this.syncEventListener(focusOnKeyDown);
-      }
-    }
-
-    componentWillUnmount() {
-      this.syncEventListener(false);
-    }
-
-    syncEventListener = (focusOnKeyDown) => {
-      if (focusOnKeyDown) {
-        window.addEventListener('keydown', this.windowKeyDown);
-      } else {
-        window.removeEventListener('keydown', this.windowKeyDown);
-      }
-    }
-
-    windowKeyDown = (e) => {
+  const FocusOnKeyDown = ({ forwardedRef, focusOnKeyDown, ...props }) => {
+    const windowKeyDown = (e) => {
       // Auto-focus the current input when a key is typed
       if (!(e.ctrlKey || e.metaKey || e.altKey)) {
-        this.focus();
+        forwardedRef.current.focus();
       }
-    }
+    };
 
-    focus = () => {
-      const { forwardedRef: input } = this.props;
-      input.current.focus();
-    }
+    useEffect(() => {
+      if (focusOnKeyDown) {
+        window.addEventListener('keydown', windowKeyDown);
+      } else {
+        window.removeEventListener('keydown', windowKeyDown);
+      }
 
-    render() {
-      const { focusOnKeyDown, forwardedRef, ...props } = this.props;
+      return () => {
+        if (focusOnKeyDown) {
+          window.removeEventListener('keydown', windowKeyDown);
+        }
+      };
+    }, [focusOnKeyDown]);
 
-      return <Input {...props} ref={forwardedRef} />;
-    }
-  }
+    return <Input {...props} ref={forwardedRef} />;
+  };
+
+  FocusOnKeyDown.propTypes = {
+    forwardedRef: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    focusOnKeyDown: PropTypes.bool,
+  };
+
+  FocusOnKeyDown.defaultProps = {
+    focusOnKeyDown: true,
+  };
+
+  FocusOnKeyDown.displayName = `FocusOnKeyDown(${getDisplayName(Input)})`;
 
   const HoistedFocusOnKeyDown = hoistStatics(FocusOnKeyDown, Input);
 

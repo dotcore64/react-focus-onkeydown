@@ -56,8 +56,8 @@
     "karma-spec-reporter": "0.0.32",
     "mocha": "^6.0.0",
     "phantomjs-prebuilt": "^2.1.16",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "rollup": "^1.2.2",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -67,7 +67,7 @@
     "sinon": "^7.1.0"
   },
   "peerDependencies": {
-    "react": ">=16.3.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "hoist-non-react-statics": "^3.0.1",

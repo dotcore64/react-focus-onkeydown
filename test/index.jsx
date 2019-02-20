@@ -3,6 +3,7 @@ import 'core-js/es6/set';
 
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
@@ -23,11 +24,14 @@ describe('react-focus-onkeydown', () => {
 
   const render = (props = {}, container = document.createElement('div')) => {
     document.body.appendChild(container);
-    ReactDOM.render((
-      <StrictMode>
-        <EnhancedInput {...props} />
-      </StrictMode>
-    ), container);
+
+    act(() => {
+      ReactDOM.render((
+        <StrictMode>
+          <EnhancedInput {...props} />
+        </StrictMode>
+      ), container);
+    });
 
     return container;
   };
