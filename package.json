@@ -54,7 +54,7 @@
     "karma-rollup-preprocessor": "^6.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "phantomjs-prebuilt": "^2.1.16",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
