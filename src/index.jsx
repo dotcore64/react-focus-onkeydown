@@ -1,30 +1,13 @@
-import React, { useEffect, createRef, forwardRef } from 'react';
+import React, { createRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import getDisplayName from 'react-display-name';
 
+import useFocusOnKeyDown from './hook';
+
 export default (Input) => {
   const FocusOnKeyDown = ({ forwardedRef, focusOnKeyDown, ...props }) => {
-    const windowKeyDown = (e) => {
-      // Auto-focus the current input when a key is typed
-      if (!(e.ctrlKey || e.metaKey || e.altKey)) {
-        forwardedRef.current.focus();
-      }
-    };
-
-    useEffect(() => {
-      if (focusOnKeyDown) {
-        window.addEventListener('keydown', windowKeyDown);
-      } else {
-        window.removeEventListener('keydown', windowKeyDown);
-      }
-
-      return () => {
-        if (focusOnKeyDown) {
-          window.removeEventListener('keydown', windowKeyDown);
-        }
-      };
-    }, [focusOnKeyDown]);
+    useFocusOnKeyDown(forwardedRef, focusOnKeyDown);
 
     return <Input {...props} ref={forwardedRef} />;
   };
