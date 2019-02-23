@@ -22,6 +22,7 @@
   "dependencies": {
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-focus-onkeydown": "file:.."
+    "react-focus-onkeydown": "file:..",
+    "rollup-plugin-serve": "^1.0.1"
   }
 }
