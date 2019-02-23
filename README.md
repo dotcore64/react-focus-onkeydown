@@ -10,7 +10,7 @@
 
 ## Live demo
 
-You can see the simplest demo here: [Live demo](https://codesandbox.io/s/615xvjnrwr)
+You can see the simplest demo here: [Live demo](https://codesandbox.io/s/m4qomn34ly)
 
 ## Install
 
