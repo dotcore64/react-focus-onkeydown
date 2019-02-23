@@ -1,7 +1,7 @@
 {
   "name": "react-focus-onkeydown",
   "version": "2.1.1",
-  "description": "React higher order component for getting focus of a component when a key is pressed anywhere in the page",
+  "description": "React hook for getting focus of a component when a key is pressed anywhere in the page",
   "main": "dist/react-focus-onkeydown.cjs.js",
   "module": "dist/react-focus-onkeydown.esm.js",
   "scripts": {
@@ -20,9 +20,8 @@
     "dist"
   ],
   "keywords": [
-    "react-component",
-    "hoc",
-    "higher order component"
+    "react",
+    "react-hooks"
   ],
   "author": "Julian Grinblat <julian@dotcore.co.il>",
   "license": "MIT",
@@ -32,7 +31,6 @@
   "homepage": "https://github.com/perrin4869/react-focus-onkeydown#readme",
   "devDependencies": {
     "@babel/core": "^7.3.3",
-    "@babel/plugin-proposal-class-properties": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
@@ -70,8 +68,6 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "hoist-non-react-statics": "^3.3.0",
-    "prop-types": "^15.7.2",
-    "react-display-name": "^0.2.4"
+    "prop-types": "^15.7.2"
   }
 }

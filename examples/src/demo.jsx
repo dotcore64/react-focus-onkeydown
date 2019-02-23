@@ -1,31 +1,21 @@
-import React, { PureComponent } from 'react';
-import focusOnKeyDown from 'react-focus-onkeydown';
+import React, { useState, useRef } from 'react';
+import useFocusOnKeyDown from 'react-focus-onkeydown';
 
-const EnhancedInput = focusOnKeyDown('input');
+export default () => {
+  const [active, setActive] = useState(true);
+  const ref = useRef(null);
+  useFocusOnKeyDown(ref, active);
 
-export default class extends PureComponent {
-  state = {
-    focus: true,
-  }
-
-  toggleFocusOnKeyDown = () => {
-    this.setState(({ focus }) => ({ focus: !focus }));
-  }
-
-  render() {
-    const { focus } = this.state;
-
-    return (
+  return (
+    <div>
+      <p>Try typing when not focused on the input below</p>
+      <input ref={ref} />
+      <button type="submit" onClick={() => setActive(!active)}>Toggle Focus on key down</button>
       <div>
-        <p>Try typing when not focused on the input below</p>
-        <EnhancedInput focusOnKeyDown={focus} />
-        <button type="submit" onClick={this.toggleFocusOnKeyDown}>Toggle Focus on key down</button>
-        <div>
-          Current status.focus:
-          {' '}
-          {focus === true ? 'true' : 'false'}
-        </div>
+        Current status.focus:
+        {' '}
+        {active === true ? 'true' : 'false'}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

@@ -19,7 +19,6 @@ export default {
         '@babel/env',
         '@babel/react',
       ],
-      plugins: ['@babel/proposal-class-properties'],
     }),
     resolve({
       extensions: ['.js', '.jsx'],
@@ -27,8 +26,7 @@ export default {
     commonjs({
       include: ['node_modules/**', '../node_modules/**'],
       namedExports: {
-        '../node_modules/react/index.js': ['createRef', 'forwardRef', 'Component'],
-        'node_modules/react/index.js': ['PureComponent'],
+        '../node_modules/react/index.js': ['useEffect', 'useState', 'useRef'], // use only one instance of react
         'node_modules/react-dom/index.js': ['render'],
       },
     }),
@@ -38,9 +36,8 @@ export default {
     }),
   ],
   output: {
-    file: 'client.js',
+    file: './public/client.js',
     format: 'iife',
-    dir: './public',
     name: 'ReactFocusOnKeyDownExamples',
     sourcemap: true,
   },

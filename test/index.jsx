@@ -1,18 +1,32 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
-import React, { StrictMode } from 'react';
+import React, { StrictMode, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
 
-import focusOnKeyDown from '..';
+import useFocusOnKeyDown from '..';
+
+const Input = ({ active, ...props }) => {
+  const ref = useRef(null);
+  useFocusOnKeyDown(ref, active);
+
+  return <input ref={ref} {...props} />;
+};
+
+Input.propTypes = {
+  active: PropTypes.bool,
+};
+
+Input.defaultProps = {
+  active: true,
+};
 
 describe('react-focus-onkeydown', () => {
-  const EnhancedInput = focusOnKeyDown('input');
-
   // TODO: figure out why this is needed and send PR if necessary
   KeyboardEvent.prototype = Event.prototype;
 
@@ -28,7 +42,7 @@ describe('react-focus-onkeydown', () => {
     act(() => {
       ReactDOM.render((
         <StrictMode>
-          <EnhancedInput {...props} />
+          <Input {...props} />
         </StrictMode>
       ), container);
     });
@@ -70,11 +84,11 @@ describe('react-focus-onkeydown', () => {
 
   it('should switch the focus feature on', () => {
     const spy = sinon.spy();
-    const container = render({ focusOnKeyDown: false, onFocus: spy });
+    const container = render({ active: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    render({ focusOnKeyDown: true, onFocus: spy }, container);
+    render({ active: true, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -82,11 +96,11 @@ describe('react-focus-onkeydown', () => {
   it('should switch the focus feature off', () => {
     const spy = sinon.spy();
 
-    const container = render({ focusOnKeyDown: true, onFocus: spy });
+    const container = render({ active: true, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
-    render({ focusOnKeyDown: false, onFocus: spy }, container);
+    render({ active: false, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -106,11 +120,11 @@ describe('react-focus-onkeydown', () => {
   it('should keep focus off when component is rerendered', () => {
     const spy = sinon.spy();
 
-    const container = render({ focusOnKeyDown: false, onFocus: spy });
+    const container = render({ active: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    render({ focusOnKeyDown: false, onFocus: spy }, container);
+    render({ active: false, onFocus: spy }, container);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(false);
   });

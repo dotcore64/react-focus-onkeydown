@@ -83,13 +83,12 @@ module.exports = (config) => {
           include: 'node_modules/**',
           namedExports: {
             'node_modules/chai/index.js': ['expect'],
-            'node_modules/prop-types/index.js': ['bool', 'func', 'node', 'number', 'oneOfType', 'element', 'string'],
+            'node_modules/prop-types/index.js': ['bool'],
             'node_modules/react-dom/test-utils.js': ['act'],
             'node_modules/react/index.js': [
+              'useRef',
               'useEffect',
               'createElement',
-              'createRef',
-              'forwardRef',
               'StrictMode',
             ],
           },

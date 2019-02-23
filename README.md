@@ -6,7 +6,7 @@
 [![Dependency Status][dependency-status-badge]][dependency-status]
 [![devDependency Status][dev-dependency-status-badge]][dev-dependency-status]
 
-> React higher order component for getting focus of a component when a key is pressed anywhere in the page
+> React hook for getting focus of a component when a key is pressed anywhere in the page
 
 ## Live demo
 
@@ -22,7 +22,7 @@ $ npm install --save react-focus-onkeydown
 
 Run examples:
 
-```javascript
+```bash
 cd examples
 npm install
 npm start
@@ -31,27 +31,31 @@ npm start
 ## Usage
 
 ```javascript
-import React, { propTypes } from 'react';
-import focusOnKeyDown from 'react-focus-onkeydown';
+import React, { useRef } from 'react';
+import useFocusOnKeyDown from 'react-focus-onkeydown';
 
-const EnhancedInput = focusOnKeyDown("input");
 const () => (
-  // Typing any key will trigger aa focus on the input below
-  <EnhancedInput />
+  const ref = useRef(null);
+  useFocusOnKeyDown(ref);
+
+  // Typing any key will trigger a focus on the input below
+  <input ref={ref} />
 )
 ```
 
-## Props
+## Parameters
 
-### focusOnKeyDown
+### ref
+
+Type: `ref`, required
+
+`ref` to the target element
+
+### active
 
 Type: `boolean`, default: `true`
 
-Activates or deactivates focus feature
-
-## TODO
-
-* Improve examples
+Controls whether or not hook is active (i.e., whether or not a keydown will cause the element to focus)
 
 ## License
 
