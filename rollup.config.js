@@ -1,6 +1,4 @@
 import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
@@ -30,10 +28,5 @@ export default [{
   output: {
     file: `dist/${pkg.name}.umd.js`, format: 'umd', globals, name,
   },
-  plugins: [
-    ...plugins,
-    resolve(),
-    commonjs(),
-    terser(),
-  ],
+  plugins: plugins.concat([terser()]),
 }];
