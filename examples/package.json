@@ -24,6 +24,6 @@
     "react-dom": "file:../node_modules/react-dom",
     "react-focus-onkeydown": "file:..",
     "rollup-plugin-livereload": "^1.0.0",
-    "rollup-plugin-serve": "^1.0.1"
+    "rollup-plugin-serve": "^1.0.2"
   }
 }
