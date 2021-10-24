@@ -5,7 +5,7 @@
   "main": "dist/react-focus-onkeydown.cjs.js",
   "module": "dist/react-focus-onkeydown.esm.js",
   "scripts": {
-    "lint": "eslint 'src/*.js?(x)' 'test/*.js?(x)'",
+    "lint": "eslint 'src/*.js' 'test/*.js?(x)'",
     "pretest": "npm run lint",
     "test": "karma start --single-run --no-auto-watch",
     "tdd": "karma start",
@@ -47,7 +47,6 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-react": "^7.26.1",
-    "events-polyfill": "^2.1.2",
     "karma": "^6.3.5",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.3",
