@@ -1,5 +1,5 @@
-import babel from 'rollup-plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+import { terser } from '@rollup/plugin-terser';
 
 import pkg from './package.json';
 
@@ -10,7 +10,7 @@ const plugins = [
 
 const name = 'ReactFocusOnKeyDown';
 const globals = { react: 'React' };
-const external = id => !id.startsWith('.') && !id.startsWith('/');
+const external = (id) => !id.startsWith('.') && !id.startsWith('/');
 
 export default [{
   external,
