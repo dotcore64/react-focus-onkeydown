@@ -1,13 +1,12 @@
-import 'core-js/es6/map';
-import 'core-js/es6/set';
+import 'core-js/features/map';
+import 'core-js/features/set';
 
-import React, { StrictMode, useRef } from 'react';
+import { StrictMode, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import 'events-polyfill'; // TODO: Not supported yet in phantomjs, remove when fixed
 
 import useFocusOnKeyDown from '..';
 
@@ -15,6 +14,7 @@ const Input = ({ active, ...props }) => {
   const ref = useRef(null);
   useFocusOnKeyDown(ref, active);
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <input ref={ref} {...props} />;
 };
 
@@ -27,9 +27,6 @@ Input.defaultProps = {
 };
 
 describe('react-focus-onkeydown', () => {
-  // TODO: figure out why this is needed and send PR if necessary
-  KeyboardEvent.prototype = Event.prototype;
-
   const event = new KeyboardEvent('keydown', {
     key: 'a',
     keyCode: 65,
@@ -42,6 +39,7 @@ describe('react-focus-onkeydown', () => {
     act(() => {
       ReactDOM.render((
         <StrictMode>
+          { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
           <Input {...props} />
         </StrictMode>
       ), container);
@@ -57,7 +55,7 @@ describe('react-focus-onkeydown', () => {
   });
 
   it('should focus on input', () => {
-    const reactSpy = sinon.spy(e => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
+    const reactSpy = sinon.spy((e) => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
     const nativeSpy = sinon.spy();
 
     const container = render({ onFocus: reactSpy });
@@ -71,7 +69,7 @@ describe('react-focus-onkeydown', () => {
     const reactArgs = reactSpy.args[0];
     expect(reactArgs).to.have.lengthOf(1); // SyntheticEvent
     const reactArg = reactArgs[0];
-    expect(reactArg.nativeEvent).to.be.instanceOf(KeyboardEvent);
+    expect(reactArg.nativeEvent).to.be.instanceOf(FocusEvent);
 
     expect(nativeSpy.calledOnce).to.equal(true);
     const nativeArgs = nativeSpy.args[0];

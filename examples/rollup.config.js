@@ -1,7 +1,7 @@
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 
@@ -18,19 +18,12 @@ export default {
       babelrc: false,
       presets: [
         '@babel/env',
-        '@babel/react',
+        ['@babel/react', { runtime: 'automatic' }],
       ],
+      babelHelpers: 'bundled',
     }),
-    resolve({
-      extensions: ['.js', '.jsx'],
-    }),
-    commonjs({
-      include: ['node_modules/**', '../node_modules/**'],
-      namedExports: {
-        '../node_modules/react/index.js': ['useEffect', 'useState', 'useRef'], // use only one instance of react
-        'node_modules/react-dom/index.js': ['render'],
-      },
-    }),
+    resolve({ extensions: ['.js', '.jsx'] }),
+    commonjs({ include: ['node_modules/**', '../node_modules/**'] }),
     serve({
       contentBase: 'public',
       port: process.env.PORT || 3000,

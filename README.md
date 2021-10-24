@@ -61,17 +61,17 @@ Controls whether or not hook is active (i.e., whether or not a keydown will caus
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/travis/perrin4869/react-focus-onkeydown/master.svg?style=flat-square
-[build]: https://travis-ci.org/perrin4869/react-focus-onkeydown
+[build-badge]: https://img.shields.io/github/workflow/status/dotcore64/react-focus-onkeydown/test/master?style=flat-square
+[build]: https://github.com/dotcore64/react-focus-onkeydown/actions
 
 [npm-badge]: https://img.shields.io/npm/v/react-focus-onkeydown.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/react-focus-onkeydown
 
-[coveralls-badge]: https://img.shields.io/coveralls/perrin4869/react-focus-onkeydown/master.svg?style=flat-square
-[coveralls]: https://coveralls.io/r/perrin4869/react-focus-onkeydown
+[coveralls-badge]: https://img.shields.io/coveralls/dotcore64/react-focus-onkeydown/master.svg?style=flat-square
+[coveralls]: https://coveralls.io/r/dotcore64/react-focus-onkeydown
 
-[dependency-status-badge]: https://david-dm.org/perrin4869/react-focus-onkeydown.svg?style=flat-square
-[dependency-status]: https://david-dm.org/perrin4869/react-focus-onkeydown
+[dependency-status-badge]: https://david-dm.org/dotcore64/react-focus-onkeydown.svg?style=flat-square
+[dependency-status]: https://david-dm.org/dotcore64/react-focus-onkeydown
 
-[dev-dependency-status-badge]: https://david-dm.org/perrin4869/react-focus-onkeydown/dev-status.svg?style=flat-square
-[dev-dependency-status]: https://david-dm.org/perrin4869/react-focus-onkeydown#info=devDependencies
+[dev-dependency-status-badge]: https://david-dm.org/dotcore64/react-focus-onkeydown/dev-status.svg?style=flat-square
+[dev-dependency-status]: https://david-dm.org/dotcore64/react-focus-onkeydown#info=devDependencies
