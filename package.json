@@ -5,8 +5,7 @@
   "main": "dist/react-focus-onkeydown.cjs.js",
   "module": "dist/react-focus-onkeydown.esm.js",
   "scripts": {
-    "lint": "eslint 'src/*.js' 'test/*.js?(x)'",
-    "pretest": "npm run lint",
+    "lint": "eslint --cache .",
     "test": "karma start --single-run --no-auto-watch",
     "tdd": "karma start",
     "build": "rollup -c",
@@ -14,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/perrin4869/react-focus-onkeydown.git"
+    "url": "git+https://github.com/dotcore64/react-focus-onkeydown.git"
   },
   "files": [
     "dist"
@@ -26,9 +25,9 @@
   "author": "Julian Grinblat <julian@dotcore.co.il>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/perrin4869/react-focus-onkeydown/issues"
+    "url": "https://github.com/dotcore64/react-focus-onkeydown/issues"
   },
-  "homepage": "https://github.com/perrin4869/react-focus-onkeydown#readme",
+  "homepage": "https://github.com/dotcore64/react-focus-onkeydown#readme",
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
