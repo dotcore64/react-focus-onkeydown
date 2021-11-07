@@ -1,6 +1,6 @@
 {
   "name": "react-focus-onkeydown",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "React hook for getting focus of a component when a key is pressed anywhere in the page",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
