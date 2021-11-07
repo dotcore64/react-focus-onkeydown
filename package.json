@@ -2,12 +2,22 @@
   "name": "react-focus-onkeydown",
   "version": "4.0.0",
   "description": "React hook for getting focus of a component when a key is pressed anywhere in the page",
-  "main": "dist/react-focus-onkeydown.cjs.js",
-  "module": "dist/react-focus-onkeydown.esm.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=12.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
     "lint": "eslint --cache .",
-    "test": "karma start --single-run --no-auto-watch",
-    "tdd": "karma start",
+    "test": "karma start karma.conf.cjs --single-run --no-auto-watch",
+    "tdd": "karma start karma.conf.cjs",
     "build": "rollup -c",
     "prepare": "npm run build"
   },
