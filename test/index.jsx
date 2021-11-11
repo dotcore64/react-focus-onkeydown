@@ -34,12 +34,14 @@ describe('react-focus-onkeydown', () => {
     document.body.appendChild(container);
 
     act(() => {
-      ReactDOM.render((
-        <StrictMode>
-          { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
-          <Input {...props} />
-        </StrictMode>
-      ), container);
+      ReactDOM.render(
+        (
+          <StrictMode>
+            { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
+            <Input {...props} />
+          </StrictMode>
+        ), container,
+      );
     });
 
     return container;
