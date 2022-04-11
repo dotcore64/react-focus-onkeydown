@@ -1,11 +1,16 @@
 import { StrictMode, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
+import { createRoot } from 'react-dom/client'; // eslint-disable-line import/no-unresolved
 import PropTypes from 'prop-types';
 import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import useFocusOnKeyDown from '..';
+// https://github.com/import-js/eslint-plugin-import/issues/1649
+// eslint-disable-next-line import/no-unresolved
+import useFocusOnKeyDown from 'react-focus-onkeydown';
+
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const Input = ({ active, ...props }) => {
   const ref = useRef(null);
@@ -30,25 +35,36 @@ describe('react-focus-onkeydown', () => {
     which: 65,
   });
 
-  const render = (props = {}, container = document.createElement('div')) => {
+  const render = (
+    props = {},
+    container = document.createElement('div'),
+    root = createRoot ? createRoot(container) : undefined,
+  ) => {
     document.body.appendChild(container);
 
-    act(() => {
-      ReactDOM.render(
-        (
-          <StrictMode>
-            { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
-            <Input {...props} />
-          </StrictMode>
-        ), container,
-      );
-    });
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    const element = <Input {...props} />;
+    if (createRoot) {
+      act(() => {
+        root.render(element);
+      });
+    } else {
+      act(() => {
+        reactDomRender(
+          (
+            <StrictMode>
+              {element}
+            </StrictMode>
+          ), container,
+        );
+      });
+    }
 
-    return container;
+    return { container, root };
   };
 
   it('should render single input', () => {
-    const container = render();
+    const { container } = render();
     expect(container.childNodes).to.have.lengthOf(1);
     expect(container.childNodes[0].tagName).to.equal('INPUT');
   });
@@ -57,7 +73,7 @@ describe('react-focus-onkeydown', () => {
     const reactSpy = sinon.spy((e) => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
     const nativeSpy = sinon.spy();
 
-    const container = render({ onFocus: reactSpy });
+    const { container } = render({ onFocus: reactSpy });
 
     const input = container.childNodes[0];
     input.addEventListener('focus', nativeSpy);
@@ -81,11 +97,11 @@ describe('react-focus-onkeydown', () => {
 
   it('should switch the focus feature on', () => {
     const spy = sinon.spy();
-    const container = render({ active: false, onFocus: spy });
+    const { container, root } = render({ active: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    render({ active: true, onFocus: spy }, container);
+    render({ active: true, onFocus: spy }, container, root);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -93,11 +109,11 @@ describe('react-focus-onkeydown', () => {
   it('should switch the focus feature off', () => {
     const spy = sinon.spy();
 
-    const container = render({ active: true, onFocus: spy });
+    const { container, root } = render({ active: true, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
-    render({ active: false, onFocus: spy }, container);
+    render({ active: false, onFocus: spy }, container, root);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -105,11 +121,19 @@ describe('react-focus-onkeydown', () => {
   it('should toggle focus off when component unmounts', () => {
     const spy = sinon.spy();
 
-    const container = render({ onFocus: spy });
+    const { container, root } = render({ onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
-    ReactDOM.unmountComponentAtNode(container);
+    if (createRoot) {
+      act(() => {
+        root.unmount();
+      });
+    } else {
+      act(() => {
+        unmountComponentAtNode(container);
+      });
+    }
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(true);
   });
@@ -117,11 +141,11 @@ describe('react-focus-onkeydown', () => {
   it('should keep focus off when component is rerendered', () => {
     const spy = sinon.spy();
 
-    const container = render({ active: false, onFocus: spy });
+    const { container, root } = render({ active: false, onFocus: spy });
 
     window.dispatchEvent(event);
     expect(spy.called).to.equal(false);
-    render({ active: false, onFocus: spy }, container);
+    render({ active: false, onFocus: spy }, container, root);
     window.dispatchEvent(event);
     expect(spy.calledOnce).to.equal(false);
   });
