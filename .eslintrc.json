@@ -2,6 +2,12 @@
   "env": {
     "browser": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "globals": {
+    "globalThis": false
+  },
   "extends": ["airbnb", "plugin:react/jsx-runtime"],
   "rules": {
     "react/function-component-definition": [2, {"namedComponents":"arrow-function"}],
