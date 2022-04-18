@@ -34,13 +34,13 @@ npm start
 import { useRef } from 'react';
 import useFocusOnKeyDown from 'react-focus-onkeydown';
 
-const () => (
+const () => {
   const ref = useRef(null);
   useFocusOnKeyDown(ref);
 
   // Typing any key will trigger a focus on the input below
-  <input ref={ref} />
-)
+  return <input ref={ref} />;
+}
 ```
 
 ## Parameters
