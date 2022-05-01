@@ -8,7 +8,7 @@ if (!process.env.CHROME_BIN) process.env.CHROME_BIN = require('puppeteer').execu
 const IS_REACT_18 = parseInt(require('react').version.split('.')[0], 10) >= 18;
 
 module.exports = (config) => {
-  const configuration = {
+  config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -19,11 +19,7 @@ module.exports = (config) => {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/index.js', // karma middleware gives out a warning when loading a jsx file
-    ],
-
-    // list of files to exclude
-    exclude: [
+      { pattern: 'test/index.js', type: 'module' }, // karma middleware gives out a warning when loading a jsx file
     ],
 
     // preprocess matching files before serving them to the browser
@@ -35,7 +31,7 @@ module.exports = (config) => {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec', 'coverage'].concat(process.env.CI ? ['coveralls'] : []),
 
     // web server port
     port: 9876,
@@ -66,7 +62,7 @@ module.exports = (config) => {
       plugins: [
         require('@rollup/plugin-replace')({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }), // this is for react
         require('@rollup/plugin-babel').default({ babelHelpers: 'bundled' }),
-        !IS_REACT_18 && require('@rollup/plugin-alias')({ entries: { 'react-dom/client': './test/react-dom-client-polyfill.js' } }),
+        !IS_REACT_18 && require('@rollup/plugin-alias')({ entries: { 'react-dom/client': 'test/react-dom-client-polyfill.js' } }),
         require('@rollup/plugin-node-resolve').default({
           mainFields: ['module', 'browser', 'main'],
           extensions: ['.js', '.jsx'],
@@ -74,7 +70,7 @@ module.exports = (config) => {
         require('@rollup/plugin-commonjs')({ include: 'node_modules/**' }),
       ].filter(Boolean),
       output: {
-        format: 'iife',
+        format: 'esm',
         sourcemap: 'inline',
       },
     },
@@ -86,11 +82,5 @@ module.exports = (config) => {
         { type: 'lcov' },
       ],
     },
-  };
-
-  if (process.env.CI) {
-    configuration.reporters.push('coveralls');
-  }
-
-  config.set(configuration);
+  });
 };
