@@ -14,8 +14,10 @@ export default [{
   external,
   input,
   output: [
-    { file: 'dist/index.cjs', format: 'cjs', exports: 'default' },
-    { file: 'dist/index.js', format: 'esm' },
+    {
+      file: 'dist/index.cjs', format: 'cjs', sourcemap: true, exports: 'default',
+    },
+    { file: 'dist/index.js', format: 'esm', sourcemap: true },
   ],
   plugins,
 }, {
