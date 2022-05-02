@@ -41,7 +41,7 @@
   "homepage": "https://github.com/dotcore64/react-focus-onkeydown#readme",
   "devDependencies": {
     "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-babel": "^5.3.1",
