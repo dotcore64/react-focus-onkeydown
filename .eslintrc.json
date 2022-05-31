@@ -5,10 +5,8 @@
     "browser": true
   },
   "parserOptions": {
-    "ecmaVersion": 2022
-  },
-  "globals": {
-    "globalThis": false
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
     "unicorn/prevent-abbreviations": 0,
@@ -26,8 +24,7 @@
       "extends": ["plugin:mocha/recommended"],
       "plugins": ["mocha"],
       "env": {
-        "mocha": true,
-        "browser": true
+        "mocha": true
       },
       "rules": {
         "mocha/no-mocha-arrows": 0,
