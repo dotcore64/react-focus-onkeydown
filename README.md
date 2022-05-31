@@ -3,8 +3,6 @@
 [![Build Status][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coverage Status][coveralls-badge]][coveralls]
-[![Dependency Status][dependency-status-badge]][dependency-status]
-[![devDependency Status][dev-dependency-status-badge]][dev-dependency-status]
 
 > React hook for getting focus of a component when a key is pressed anywhere in the page
 
@@ -69,9 +67,3 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 [coveralls-badge]: https://img.shields.io/coveralls/dotcore64/react-focus-onkeydown/master.svg?style=flat-square
 [coveralls]: https://coveralls.io/r/dotcore64/react-focus-onkeydown
-
-[dependency-status-badge]: https://david-dm.org/dotcore64/react-focus-onkeydown.svg?style=flat-square
-[dependency-status]: https://david-dm.org/dotcore64/react-focus-onkeydown
-
-[dev-dependency-status-badge]: https://david-dm.org/dotcore64/react-focus-onkeydown/dev-status.svg?style=flat-square
-[dev-dependency-status]: https://david-dm.org/dotcore64/react-focus-onkeydown#info=devDependencies
