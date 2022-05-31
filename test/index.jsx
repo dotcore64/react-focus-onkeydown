@@ -40,7 +40,7 @@ describe('react-focus-onkeydown', () => {
     container = document.createElement('div'),
     root = createRoot ? createRoot(container) : undefined,
   ) => {
-    document.body.appendChild(container);
+    document.body.append(container);
 
     // eslint-disable-next-line react/jsx-props-no-spreading
     const element = <Input {...props} />;
