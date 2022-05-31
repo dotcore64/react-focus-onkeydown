@@ -20,7 +20,7 @@
     "url": "git+https://github.com/dotcore64/react-focus-onkeydown.git"
   },
   "files": [
-    "dist"
+    "index.js"
   ],
   "keywords": [
     "react",
