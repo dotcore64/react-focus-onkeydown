@@ -1,6 +1,6 @@
 import { StrictMode, useRef } from 'react';
 import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
-import { createRoot } from 'react-dom/client'; // eslint-disable-line import/no-unresolved
+import { createRoot } from 'react-dom/client';
 import PropTypes from 'prop-types';
 import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
