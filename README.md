@@ -59,7 +59,7 @@ Controls whether or not hook is active (i.e., whether or not a keydown will caus
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/github/workflow/status/dotcore64/react-focus-onkeydown/test/master?style=flat-square
+[build-badge]: https://img.shields.io/github/actions/workflow/status/dotcore64/react-focus-onkeydown/test.yml?event=push&style=flat-square
 [build]: https://github.com/dotcore64/react-focus-onkeydown/actions
 
 [npm-badge]: https://img.shields.io/npm/v/react-focus-onkeydown.svg?style=flat-square
