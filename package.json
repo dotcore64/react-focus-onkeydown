@@ -65,7 +65,7 @@
     "puppeteer": "^20.7.4",
     "react": "^18.1.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.23.0",
+    "rollup": "^3.26.0",
     "sinon": "^15.2.0"
   },
   "peerDependencies": {
