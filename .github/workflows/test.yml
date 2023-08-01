@@ -33,11 +33,6 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
-      # examples dir ci will fail on npm@6
-      - name: Install npm@8
-        if: ${{ matrix.node-version == '14.x' }}
-        run: npm install -g npm@8
-
       # help the linter
       - name: Install example dependencies
         working-directory: ./examples
