@@ -51,7 +51,7 @@
     "eslint-plugin-mocha": "^10.2.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-unicorn": "^51.0.1",
-    "karma": "^6.4.2",
+    "karma": "^6.4.3",
     "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "^2.2.1",
     "karma-coveralls": "^2.1.0",
