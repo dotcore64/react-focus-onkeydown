@@ -3,9 +3,9 @@
     "airbnb",
     "plugin:react/jsx-runtime",
     "plugin:unicorn/recommended",
-    "plugin:eslint-comments/recommended"
+    "plugin:@eslint-community/eslint-comments/recommended"
   ],
-  "plugins": ["unicorn", "eslint-comments"],
+  "plugins": ["unicorn"],
   "env": {
     "browser": true
   },
@@ -26,7 +26,7 @@
         "devDependencies": ["karma.conf.cjs", "examples/rollup.config.js"]
       }
     ],
-    "eslint-comments/no-unused-disable": "error"
+    "@eslint-community/eslint-comments/no-unused-disable": "error"
   },
   "overrides": [
     {
