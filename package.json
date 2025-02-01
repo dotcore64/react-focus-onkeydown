@@ -62,7 +62,7 @@
     "karma-spec-reporter": "0.0.36",
     "mocha": "^11.1.0",
     "prop-types": "^15.8.1",
-    "puppeteer": "^23.11.1",
+    "puppeteer": "^24.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rollup": "^4.34.0",
