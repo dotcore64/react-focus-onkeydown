@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/dotcore64/react-focus-onkeydown#readme",
   "devDependencies": {
-    "@babel/core": "^7.27.7",
+    "@babel/core": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
     "@rollup/plugin-alias": "^5.1.1",
