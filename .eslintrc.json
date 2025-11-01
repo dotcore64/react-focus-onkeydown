@@ -16,6 +16,7 @@
   "rules": {
     "unicorn/prevent-abbreviations": 0,
     "unicorn/no-anonymous-default-export": 0,
+    "unicorn/no-await-expression-member": 0,
     "react/function-component-definition": [
       "error",
       { "namedComponents": "arrow-function" }
