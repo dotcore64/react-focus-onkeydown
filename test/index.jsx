@@ -1,14 +1,14 @@
-import { StrictMode, useRef } from 'react';
-import { render as reactDomRender, unmountComponentAtNode } from 'react-dom'; // eslint-disable-line react/no-deprecated
-import { createRoot } from 'react-dom/client';
-import PropTypes from 'prop-types';
-import { act } from 'react-dom/test-utils';
-import { spy } from 'sinon';
-import { expect } from 'chai';
+import { StrictMode, useRef } from "react";
+import { render as reactDomRender, unmountComponentAtNode } from "react-dom"; // eslint-disable-line react/no-deprecated
+import { createRoot } from "react-dom/client";
+import PropTypes from "prop-types";
+import { act } from "react-dom/test-utils";
+import { spy } from "sinon";
+import { expect } from "chai";
 
 // https://github.com/import-js/eslint-plugin-import/issues/1649
 // eslint-disable-next-line import/no-unresolved
-import useFocusOnKeyDown from 'react-focus-onkeydown';
+import useFocusOnKeyDown from "react-focus-onkeydown";
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -16,7 +16,6 @@ const Input = ({ active, ...props }) => {
   const ref = useRef(null);
   useFocusOnKeyDown(ref, active);
 
-   
   return <input ref={ref} {...props} />;
 };
 
@@ -28,21 +27,20 @@ Input.defaultProps = {
   active: true,
 };
 
-describe('react-focus-onkeydown', () => {
-  const event = new KeyboardEvent('keydown', {
-    key: 'a',
+describe("react-focus-onkeydown", () => {
+  const event = new KeyboardEvent("keydown", {
+    key: "a",
     keyCode: 65,
     which: 65,
   });
 
   const render = (
     props = {},
-    container = document.createElement('div'),
+    container = document.createElement("div"),
     root = createRoot ? createRoot(container) : undefined,
   ) => {
     document.body.append(container);
 
-     
     const element = <Input {...props} />;
     if (createRoot) {
       act(() => {
@@ -50,33 +48,27 @@ describe('react-focus-onkeydown', () => {
       });
     } else {
       act(() => {
-        reactDomRender(
-          (
-            <StrictMode>
-              {element}
-            </StrictMode>
-          ), container,
-        );
+        reactDomRender(<StrictMode>{element}</StrictMode>, container);
       });
     }
 
     return { container, root };
   };
 
-  it('should render single input', () => {
+  it("should render single input", () => {
     const { container } = render();
     expect(container.childNodes).to.have.lengthOf(1);
-    expect(container.firstChild.tagName).to.equal('INPUT');
+    expect(container.firstChild.tagName).to.equal("INPUT");
   });
 
-  it('should focus on input', () => {
+  it("should focus on input", () => {
     const reactSpy = spy((e) => e.persist()); // https://reactjs.org/docs/events.html#event-pooling
     const nativeSpy = spy();
 
     const { container } = render({ onFocus: reactSpy });
 
     const input = container.firstChild;
-    input.addEventListener('focus', nativeSpy);
+    input.addEventListener("focus", nativeSpy);
 
     globalThis.dispatchEvent(event);
 
@@ -95,7 +87,7 @@ describe('react-focus-onkeydown', () => {
     expect(document.activeElement).to.equal(input);
   });
 
-  it('should switch the focus feature on', () => {
+  it("should switch the focus feature on", () => {
     const onFocus = spy();
     const { container, root } = render({ active: false, onFocus });
 
@@ -106,7 +98,7 @@ describe('react-focus-onkeydown', () => {
     expect(onFocus.calledOnce).to.equal(true);
   });
 
-  it('should switch the focus feature off', () => {
+  it("should switch the focus feature off", () => {
     const onFocus = spy();
 
     const { container, root } = render({ active: true, onFocus });
@@ -118,7 +110,7 @@ describe('react-focus-onkeydown', () => {
     expect(onFocus.calledOnce).to.equal(true);
   });
 
-  it('should toggle focus off when component unmounts', () => {
+  it("should toggle focus off when component unmounts", () => {
     const onFocus = spy();
 
     const { container, root } = render({ onFocus });
@@ -138,7 +130,7 @@ describe('react-focus-onkeydown', () => {
     expect(onFocus.calledOnce).to.equal(true);
   });
 
-  it('should keep focus off when component is rerendered', () => {
+  it("should keep focus off when component is rerendered", () => {
     const onFocus = spy();
 
     const { container, root } = render({ active: false, onFocus });
@@ -150,13 +142,13 @@ describe('react-focus-onkeydown', () => {
     expect(onFocus.calledOnce).to.equal(false);
   });
 
-  it('should not focus when ctrl key is used', () => {
+  it("should not focus when ctrl key is used", () => {
     const onFocus = spy();
 
     render({ onFocus });
 
-    const ctrlEvent = new KeyboardEvent('keydown', {
-      key: 'a',
+    const ctrlEvent = new KeyboardEvent("keydown", {
+      key: "a",
       keyCode: 65,
       which: 65,
       ctrlKey: true,
