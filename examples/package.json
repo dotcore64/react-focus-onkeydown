@@ -2,6 +2,7 @@
   "name": "react-focus-onkeydown-examples",
   "version": "0.0.1",
   "description": "Live examples of react-focus-onkeydown in action",
+  "private": true,
   "main": "src/main.jsx",
   "scripts": {
     "start": "rollup -c"

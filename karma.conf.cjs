@@ -1,10 +1,10 @@
-/* eslint-disable global-require, max-len  */
+ 
 
 // Karma configuration
 // Generated on Wed May 11 2016 23:26:57 GMT+0900 (JST)
 
 if (!process.env.CHROME_BIN) process.env.CHROME_BIN = require('puppeteer').executablePath();
-const IS_REACT_18 = Number.parseInt(require('react').version.split('.')[0], 10) >= 18;
+const IS_REACT_18 = Number.parseInt(require('react').version.split('.', 1)[0], 10) >= 18;
 
 module.exports = async (config) => {
   config.set({
@@ -77,6 +77,7 @@ module.exports = async (config) => {
           presets: [['@babel/react', { runtime: 'automatic' }]],
           plugins: [['istanbul', { include: 'index.js' }]],
         }),
+        // eslint-disable-next-line import/no-unresolved
         !IS_REACT_18 && (await import('@rollup/plugin-alias')).default({
           entries: { 'react-dom/client': 'test/react-dom-client-polyfill.js' },
         }),
@@ -101,4 +102,4 @@ module.exports = async (config) => {
     },
   });
 };
-/* eslint-enable global-require, max-len  */
+ 
