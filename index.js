@@ -10,14 +10,14 @@ export default (ref, active = true) => {
 
   useEffect(() => {
     if (active) {
-      window.addEventListener('keydown', windowKeyDown);
+      globalThis.addEventListener('keydown', windowKeyDown);
     } else {
-      window.removeEventListener('keydown', windowKeyDown);
+      globalThis.removeEventListener('keydown', windowKeyDown);
     }
 
     return () => {
       if (active) {
-        window.removeEventListener('keydown', windowKeyDown);
+        globalThis.removeEventListener('keydown', windowKeyDown);
       }
     };
   }, [active]);
