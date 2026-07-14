@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default (ref, active = true) => {
   const windowKeyDown = (e) => {
@@ -10,14 +10,14 @@ export default (ref, active = true) => {
 
   useEffect(() => {
     if (active) {
-      globalThis.addEventListener('keydown', windowKeyDown);
+      globalThis.addEventListener("keydown", windowKeyDown);
     } else {
-      globalThis.removeEventListener('keydown', windowKeyDown);
+      globalThis.removeEventListener("keydown", windowKeyDown);
     }
 
     return () => {
       if (active) {
-        globalThis.removeEventListener('keydown', windowKeyDown);
+        globalThis.removeEventListener("keydown", windowKeyDown);
       }
     };
   }, [active]);

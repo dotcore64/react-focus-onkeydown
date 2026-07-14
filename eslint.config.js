@@ -6,6 +6,7 @@ import unicorn from "eslint-plugin-unicorn";
 import react from "eslint-plugin-react";
 import hooks from "eslint-plugin-react-hooks";
 import comments from "@eslint-community/eslint-plugin-eslint-comments/configs";
+import prettier from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 
 const testFiles = ["test/{,**/}*.js{,x}"];
@@ -16,6 +17,7 @@ export default [
   comments.recommended,
   unicorn.configs.recommended,
   imprt.flatConfigs.recommended,
+  prettier,
   {
     languageOptions: {
       sourceType: "module",
@@ -56,11 +58,7 @@ export default [
     files: ["**/*.jsx"],
   },
   {
-    ignores: [
-      "coverage/",
-      "node_modules/",
-      "examples/public/client.js",
-    ],
+    ignores: ["coverage/", "node_modules/", "examples/public/client.js"],
   },
   {
     settings: {
