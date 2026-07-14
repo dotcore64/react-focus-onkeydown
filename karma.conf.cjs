@@ -47,7 +47,19 @@ module.exports = async (config) => {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+    browsers: ['ChromeHeadless', 'FirefoxHeadlessTest'],
+
+    customLaunchers: {
+      // Firefox's "terms of use" notification steals focus in headless mode, which
+      // prevents `Element.focus()` from firing focus events until it's dismissed.
+      // https://github.com/karma-runner/karma-firefox-launcher/issues/56
+      FirefoxHeadlessTest: {
+        base: 'FirefoxHeadless',
+        prefs: {
+          'termsofuse.bypassNotification': true,
+        },
+      },
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
